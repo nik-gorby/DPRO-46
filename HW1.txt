@@ -1,0 +1,5 @@
+>>> data = sc.textFile('movies.csv')
+>>> header = data.first()
+>>> data.filter(lambda x: x != header).map(lambda x: (x.split(','))[0]).map(lambda x: x.lower()).map(lambda x: x.split(' ')).flatMap(lambda x: x).map(lambda x: [x, 1]).reduceByKey(lambda a, b: a+b).takeOrdered(10, key=lambda x: -x[1])
+[('the', 14), ('and', 9), ('of', 6), ('a', 5), ('you', 4), ('love', 4), ('in', 4), ('for', 3), ('day', 3), ('i', 3)]
+>>>
